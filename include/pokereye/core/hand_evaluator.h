@@ -5,7 +5,7 @@
 #include <array>
 #include <cstdint>
 
-namespace Poker {
+namespace PokerEye {
   using HandRank = uint32_t;
 
   class HandEvaluator {

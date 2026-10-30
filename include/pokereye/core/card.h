@@ -2,7 +2,7 @@
 
 #include "types.h"
 
-namespace Poker {
+namespace PokerEye {
   /*
    * card = suit * 4 + rank
    */

@@ -5,7 +5,7 @@
 #include <array>
 #include <cstdint>
 
-namespace Poker {
+namespace PokerEye {
   struct PlayerState {
     std::array<Card, 2> holeCards{
       INVALID_CARD, INVALID_CARD

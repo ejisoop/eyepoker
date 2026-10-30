@@ -2,7 +2,7 @@
 
 #include "types.h"
 
-namespace Poker {
+namespace PokerEye {
   enum class ActionType : uint8_t {
     Fold,
     Check,

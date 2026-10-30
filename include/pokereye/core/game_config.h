@@ -2,7 +2,7 @@
 
 #include "types.h"
 
-namespace Poker {
+namespace PokerEye {
   struct GameConfig {
     uint8_t numPlayers = 6;
 

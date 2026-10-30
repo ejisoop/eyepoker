@@ -5,7 +5,7 @@
 
 #include <array>
 
-namespace Poker {
+namespace PokerEye {
   struct Observation {
     uint64_t handNumber;
     PlayerId hero;

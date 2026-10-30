@@ -5,7 +5,7 @@
 
 #include <array>
 
-namespace Poker {
+namespace PokerEye {
   struct PotResult {
     std::array<Chips, MAX_PLAYERS> winnings{};
   }

@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <limits>
 
-namespace Poker {
+namespace PokerEye {
   using Chips = int64_t;
   using PlayerId = uint8_t;
   using Card = uint8_t;
@@ -18,7 +18,7 @@ namespace Poker {
     Turn,
     River,
     Showdown
-  }
+  };
 
   enum class PlayerStatus : uint8_t {
     None,

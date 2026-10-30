@@ -7,7 +7,7 @@
 #include "observation.h"
 #include "pot.h"
 
-namespace Poker {
+namespace PokerEye {
   enum class StepStatus : uint8_t {
     NextDecision,
     HandComplete,

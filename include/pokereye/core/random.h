@@ -7,7 +7,7 @@
  * using xoshiro256++
  */
 
-namespace Poker {
+namespace PokerEye {
   class Random {
   public:
     Random(uint64_t seed) noexcept {

@@ -1,9 +1,9 @@
-#include <core/random.h>
+#include <pokereye/core/random.h>
 
 #include <cassert>
 #include <bit>
 
-using namespace Poker;
+using namespace PokerEye;
 
 void Random::reseed(uint64_t seed) noexcept {
   for (auto& word : state_) {
@@ -40,7 +40,7 @@ uint64_t Random::bounded(uint64_t bound) noexcept {
   }
 }
 
-static uint64_t splitmix(uint64_t& seed) noexcept {
+uint64_t Random::splitmix(uint64_t& seed) noexcept {
   uint64_t z = (seed += 0x9E3779B97F4A7C15ULL);
   z = (z ^ (z >> 30)) * 0xBF58476D1CE4E5B9ULL;
   z = (z ^ (z >> 27)) * 0x94D049BB133111EBULL;
