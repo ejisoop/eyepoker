@@ -8,11 +8,6 @@
 #include <cstdint>
 
 namespace PokerEye {
-  enum class ShuffleStrategy : uint8_t {
-    Lazy,
-    Full
-  };
-
   template<ShuffleStrategy Strategy = ShuffleStrategy::Lazy>
   class Deck {
   public:

@@ -12,6 +12,7 @@ FetchContent_MakeAvailable(googletest)
 add_executable(poker_tests
   unit/random_test.cpp
   unit/deck_test.cpp
+  unit/hand_evaluator_test.cpp
 )
 
 target_link_libraries(poker_tests

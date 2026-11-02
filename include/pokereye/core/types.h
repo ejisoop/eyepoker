@@ -33,4 +33,10 @@ namespace PokerEye {
     InProgress,
     Complete
   };
+
+  enum class ShuffleStrategy : uint8_t {
+    Lazy,
+    Full
+  };
+
 }

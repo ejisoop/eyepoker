@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_library(poker_core STATIC
   src/core/random.cpp
   src/core/deck.cpp
+  src/core/hand_evaluator.cpp
 )
 
 target_include_directories(poker_core

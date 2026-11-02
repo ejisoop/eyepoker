@@ -9,9 +9,11 @@ namespace PokerEye {
     Chips smallBlind = 50;
     Chips bigBlind = 100;
 
-    Chips ante = 0;
+    Chips ante = 0; // not planned for now...?
 
     Chips startingStack = 10'000;
-    uint64_t seed = 1;
+    uint64_t seed = 42;
+
+    ShuffleStrategy shuffleStrategy = ShuffleStrategy::Full;
   }
 }
