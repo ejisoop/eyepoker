@@ -107,12 +107,26 @@ EquityResult simulateEquity(const EquityRequest& request) {
       }
     }
   };
-  // jthread joins safely if thread creation throws after some workers started.
+  // Join all started workers, including if thread creation fails.
   {
-    std::vector<std::jthread> threads;
+    std::vector<std::thread> threads;
     threads.reserve(workers - 1);
-    for (unsigned w = 1; w < workers; ++w) threads.emplace_back(work, w);
-    work(0);
+
+    try {
+      for (unsigned w = 1; w < workers; ++w) {
+        threads.emplace_back(work, w);
+      }
+      work(0);
+    } catch (...) {
+      for (auto& thread : threads) {
+        if (thread.joinable()) thread.join();
+      }
+      throw;
+    }
+
+    for (auto& thread : threads) {
+      if (thread.joinable()) thread.join();
+    }
   }
   BlockResult totals;
   for (const auto& part : partial)
