@@ -17,6 +17,8 @@ namespace PokerEye {
     void reseed(uint64_t seed) noexcept;
     uint64_t next() noexcept;
     uint64_t bounded(uint64_t bound) noexcept;
+    // Unbiased multiply/reject mapping; avoids division on the common path.
+    uint32_t bounded32(uint32_t bound) noexcept;
 
     const std::array<uint64_t, 4>& state() const noexcept {
       return state_;

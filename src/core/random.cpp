@@ -46,3 +46,17 @@ uint64_t Random::splitmix(uint64_t& seed) noexcept {
   z = (z ^ (z >> 27)) * 0x94D049BB133111EBULL;
   return z ^ (z >> 31);
 }
+
+uint32_t Random::bounded32(uint32_t bound) noexcept {
+  assert(bound > 0);
+  uint64_t product = (next() >> 32) * bound;
+  uint32_t low = static_cast<uint32_t>(product);
+  if (low < bound) {
+    const uint32_t threshold = (uint32_t{0} - bound) % bound;
+    while (low < threshold) {
+      product = (next() >> 32) * bound;
+      low = static_cast<uint32_t>(product);
+    }
+  }
+  return static_cast<uint32_t>(product >> 32);
+}

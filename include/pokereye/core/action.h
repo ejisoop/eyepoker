@@ -12,8 +12,9 @@ namespace PokerEye {
 
   struct Action {
     ActionType type;
+    // Total contribution on this street, not the raise increment.
     Chips raise = 0;
-  }
+  };
 
   enum ActionFlag : uint8_t {
     CanFold = 1 << 0,
@@ -32,5 +33,5 @@ namespace PokerEye {
     bool allows(ActionFlag flag) const noexcept {
       return (mask & flag) != 0;
     }
-  }
+  };
 }

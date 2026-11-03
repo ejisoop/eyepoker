@@ -8,7 +8,7 @@
 namespace PokerEye {
   struct PotResult {
     std::array<Chips, MAX_PLAYERS> winnings{};
-  }
+  };
 
   class PotManager {
   public:

@@ -7,8 +7,9 @@
 
 namespace PokerEye {
   struct PlayerState {
-    std::array<Card, 2> holeCards{
-      INVALID_CARD, INVALID_CARD
+    std::array<Card, MAX_HOLE_CARDS> holeCards{
+      INVALID_CARD, INVALID_CARD, INVALID_CARD,
+      INVALID_CARD, INVALID_CARD, INVALID_CARD
     };
 
     Chips stack = 0;
@@ -19,6 +20,8 @@ namespace PokerEye {
     PlayerStatus status = PlayerStatus::None;
 
     bool needsAction = false;
+    bool acted = false;
+    Chips lastActionBet = 0;
   };
 
   struct GameState {
@@ -41,11 +44,14 @@ namespace PokerEye {
     PlayerId currentPlayer = INVALID_PLAYER;
 
     uint8_t numPlayers = 0;
+    uint8_t holeCardCount = 2;
 
     Chips pot = 0;
     Chips currentBet = 0;
 
     Chips lastFullRaise = 0;
     uint64_t handNumber = 0;
+    // Gross pot awards (including returned uncalled chips) from the last hand.
+    std::array<Chips, MAX_PLAYERS> winnings{};
   };
 }

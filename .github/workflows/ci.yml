@@ -1,0 +1,25 @@
+name: C++ validation
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        mode: [release, sanitizers]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: >-
+          cmake -S . -B build/ci
+          -DCMAKE_BUILD_TYPE=${{ matrix.mode == 'release' && 'Release' || 'Debug' }}
+          -DPOKEREYE_SANITIZERS=${{ matrix.mode == 'sanitizers' && 'ON' || 'OFF' }}
+          -DPOKEREYE_BENCHMARKS=OFF
+      - name: Build
+        run: cmake --build build/ci --parallel 2
+      - name: Test
+        run: ctest --test-dir build/ci --output-on-failure
+        env:
+          UBSAN_OPTIONS: halt_on_error=1:print_stacktrace=1
+          ASAN_OPTIONS: detect_leaks=1

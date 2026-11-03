@@ -11,6 +11,7 @@ namespace PokerEye {
   constexpr PlayerId MAX_PLAYERS = 12; // arbitrary max
   constexpr PlayerId INVALID_PLAYER = 255;
   constexpr Card INVALID_CARD = 255;
+  constexpr uint8_t MAX_HOLE_CARDS = 6;
 
   enum class Street : uint8_t {
     Preflop,

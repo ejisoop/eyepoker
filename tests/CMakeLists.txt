@@ -1,26 +1,19 @@
-include(FetchContent)
-
-FetchContent_Declare(
-  googletest
-  GIT_REPOSITORY
-    https://github.com/google/googletest.git
-  GIT_TAG v1.16.0
-)
-
-FetchContent_MakeAvailable(googletest)
-
-add_executable(poker_tests
-  unit/random_test.cpp
-  unit/deck_test.cpp
-  unit/hand_evaluator_test.cpp
-)
-
-target_link_libraries(poker_tests
-  PRIVATE
-    poker_core
-    GTest::gtest_main
-)
-
-include(GoogleTest)
-
-gtest_discover_tests(poker_tests)
+# Default suite is self-contained: no dependency downloads during configure.
+add_executable(poker_tests core_test.cpp)
+target_link_libraries(poker_tests PRIVATE PokerEye::core)
+add_test(NAME poker_core COMMAND poker_tests)
+add_executable(poker_allocation_tests allocation_test.cpp)
+target_link_libraries(poker_allocation_tests PRIVATE PokerEye::core)
+add_test(NAME poker_allocations COMMAND poker_allocation_tests)
+add_test(NAME poker_cli_help COMMAND poker_sim --help)
+add_test(NAME poker_cli_equity COMMAND poker_sim equity --hand AsAh --hand KsKh --trials 5000 --threads 2)
+add_test(NAME poker_cli_play COMMAND poker_sim play --variant omaha --players 4 --hands 100)
+add_test(NAME poker_cli_invalid COMMAND poker_sim equity --hand AsAs)
+set_tests_properties(poker_cli_invalid PROPERTIES WILL_FAIL TRUE)
+if(POKEREYE_LEGACY_TESTS)
+  find_package(GTest REQUIRED)
+  add_executable(poker_legacy_tests unit/random_test.cpp unit/deck_test.cpp unit/hand_evaluator_test.cpp)
+  target_link_libraries(poker_legacy_tests PRIVATE PokerEye::core GTest::gtest_main)
+  include(GoogleTest)
+  gtest_discover_tests(poker_legacy_tests)
+endif()

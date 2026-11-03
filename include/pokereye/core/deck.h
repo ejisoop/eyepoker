@@ -12,6 +12,7 @@ namespace PokerEye {
   class Deck {
   public:
     Deck() noexcept;
+    explicit Deck(uint8_t minimumRank);
 
     void restore() noexcept;
 
@@ -23,6 +24,8 @@ namespace PokerEye {
   private:
     std::array<Card, DECK_SIZE> cards_{};
     uint8_t next_ = 0;
+    uint8_t minimumRank_ = 0;
+    uint8_t size_ = DECK_SIZE;
   };
 
   extern template class Deck<ShuffleStrategy::Lazy>;

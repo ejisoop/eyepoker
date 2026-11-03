@@ -1,6 +1,7 @@
 #pragma once
 
 #include "types.h"
+#include "rules.h"
 
 #include <array>
 #include <cstdint>
@@ -19,5 +20,14 @@ namespace PokerEye {
 
     [[nodiscard]]
     static HandRank evaluateSeven(const std::array<Card, 7>& cards) noexcept;
+
+    // Hot-path APIs: cards must be valid, distinct and in the configured deck;
+    // rules must pass validate(). Category numbers reflect configured ordering.
+    [[nodiscard]]
+    static HandRank evaluateFive(const std::array<Card, 5>& cards, const GameRules& rules) noexcept;
+    [[nodiscard]]
+    static HandRank evaluateShowdown(const std::array<Card, MAX_HOLE_CARDS>& hole,
+                                    const std::array<Card, 5>& board,
+                                    const GameRules& rules) noexcept;
   };
 }
